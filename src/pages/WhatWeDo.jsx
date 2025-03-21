@@ -88,6 +88,8 @@ export default function WhatWeDo() {
 
   // State to track image index for each service
   const [imageIndices, setImageIndices] = useState(services.map(() => 0));
+  // State to track if cards are hovered
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   // Rotate images every 3 seconds for each service
   useEffect(() => {
@@ -113,20 +115,60 @@ export default function WhatWeDo() {
             <Link
               to={`/service/${service.id}`}
               key={service.id}
-              className="group relative bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 flex flex-col items-center justify-center text-center cursor-pointer overflow-hidden"
+              className="group relative bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center cursor-pointer overflow-hidden h-64 transform transition-all duration-500 ease-in-out"
               style={{
                 backgroundImage: `url(${service.images[imageIndices[index]]})`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center'
+                backgroundPosition: 'center',
+                transform: hoveredCard === service.id ? 'scale(1.05)' : 'scale(1)',
+                boxShadow: hoveredCard === service.id ? '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)' : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
               }}
+              onMouseEnter={() => setHoveredCard(service.id)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Overlay for readability */}
-              <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-40 transition-all duration-300"></div>
+              {/* Overlay gradient effect */}
+              <div 
+                className="absolute inset-0 transition-all duration-500 ease-in-out"
+                style={{
+                  background: hoveredCard === service.id 
+                    ? 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 100%)' 
+                    : 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%)'
+                }}
+              ></div>
               
-              {/* Enhanced Title */}
-              <h3 className="relative text-2xl sm:text-3xl font-bold text-white group-hover:text-blue-100 transition-colors duration-300 z-10 tracking-wide drop-shadow-lg uppercase">
-                {service.title}
-              </h3>
+              {/* Title with slide-up animation */}
+              <div 
+                className="relative z-10 w-full px-6 transition-all duration-500 ease-in-out"
+                style={{
+                  transform: hoveredCard === service.id ? 'translateY(-10px)' : 'translateY(0)'
+                }}
+              >
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-lg uppercase">
+                  {service.title}
+                </h3>
+                
+                {/* Additional content revealed on hover */}
+                <div 
+                  className="overflow-hidden transition-all duration-500 ease-in-out"
+                  style={{
+                    maxHeight: hoveredCard === service.id ? '100px' : '0',
+                    opacity: hoveredCard === service.id ? 1 : 0,
+                    marginTop: hoveredCard === service.id ? '12px' : '0'
+                  }}
+                >
+                  <div className="h-1 w-16 bg-blue-400 mx-auto mb-3"></div>
+                  <p className="text-white text-sm">Explore our {service.title.toLowerCase()} services</p>
+                </div>
+              </div>
+              
+              {/* Animated border accent on hover */}
+              <div 
+                className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 transition-all duration-500 ease-in-out"
+                style={{
+                  transform: hoveredCard === service.id ? 'scaleX(1)' : 'scaleX(0)',
+                  transformOrigin: 'center'
+                }}
+              ></div>
             </Link>
           ))}
         </div>
