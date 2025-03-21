@@ -6,8 +6,8 @@ const navItems = [
   { name: "HOME", href: "/" },
   { name: "WHO ARE WE", href: "/who-we-are" },
   { name: "WHAT WE DO", href: "/what-we-do" },
-  { name: "NEWS", href: "/news" },
-  { name: "CAREERS", href: "/careers" },
+  // { name: "NEWS", href: "/news" },
+  // { name: "CAREERS", href: "/careers" },
   { name: "CONTACT US", href: "/contact-us" },
 ];
 
@@ -32,7 +32,6 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
@@ -49,8 +48,14 @@ export default function Navbar() {
             <Link
               key={item.name}
               to={item.href}
-              className={`text-sm font-medium transition-colors hover:text-amber-500 ${
-                activeItem === item.name ? "text-white" : "text-blue-800"
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                activeItem === item.name
+                  ? scrolled
+                    ? "text-black"
+                    : "text-white"
+                  : scrolled
+                  ? "text-gray-800"
+                  : "text-white"
               }`}
               onClick={() => setActiveItem(item.name)}
             >

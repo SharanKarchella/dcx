@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 export default function StrategyVision() {
   const images = [
-    "/images/image.png",
-    // "/images/StrategyVision/image1.png",
+    
+    "/images/StrategyVision/image.png",
     "/images/StrategyVision/image2.png",
-    "/images/StrategyVision/image3.png"
+    "/images/StrategyVision/team.png",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,7 +29,7 @@ export default function StrategyVision() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Strategy</h2>
               <p className="text-gray-700 leading-relaxed">
-                Dcx Group invests selectively to acquire, manage, and sell private equities and real estate
+                DCX Group invests selectively to acquire, manage, and sell private equities and real estate
                 in domestic and international businesses. Its strategic emphasis is on identifying the
                 optimal investment opportunities and maximizing the value of its assets globally.
               </p>
@@ -59,7 +59,7 @@ export default function StrategyVision() {
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Vision</h2>
                   <p className="text-gray-700 leading-relaxed">
-                    To become one of the most diverse business groups and investment companies, Dcx aims
+                    To become one of the most diverse business groups and investment companies, DCX aims
                     to develop a strong, cohesive vision to lead its current and future investment strategy.
                   </p>
                 </div>
@@ -72,7 +72,7 @@ export default function StrategyVision() {
             <div className="relative w-full h-full">
               <img
                 src={images[currentIndex]}
-                alt="Dcx Strategy Compass"
+                alt="DCX Strategy Compass"
                 className="object-cover w-full h-full transition-opacity duration-1000"
               />
             </div>

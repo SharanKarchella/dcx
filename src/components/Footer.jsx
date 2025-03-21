@@ -10,13 +10,13 @@ export default function Footer() {
             <a href="/" className="flex items-center">
               <img
                 src="/logo.png"
-                alt="Dcx Logo"
+                alt="DCX Logo"
                 className="h-12 w-12 mr-2 object-contain"
               />
-              <span className="text-xl font-bold text-amber-500">Dcx</span>
+              <span className="text-xl font-bold text-amber-500">DCX</span>
             </a>
             <p className="text-gray-300 text-sm">
-              Dcx Group is an international investment company.
+              DCX Group is an international investment company.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Dcx Group. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} DCX Group. All rights reserved.</p>
         </div>
       </div>
     </footer>

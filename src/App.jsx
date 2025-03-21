@@ -14,7 +14,6 @@ function App() {
     <ThemeProvider>
       
       <Router>
-        
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/who-we-are" element={<WhoWeAre />} />
