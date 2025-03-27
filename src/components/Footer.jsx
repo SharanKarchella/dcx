@@ -9,11 +9,11 @@ export default function Footer() {
           <div className="space-y-4">
             <a href="/" className="flex items-center">
               <img
-                src="/logo.png"
+                src="/images/Logo/dcxlogo.jpeg"
                 alt="DCX Logo"
-                className="h-12 w-12 mr-2 object-contain"
+                className="h-6 w-6 mr-2 object-contain"
               />
-              <span className="text-xl font-bold text-amber-500">DCX</span>
+              <span className="text-xl font-bold text-white">DCX</span>
             </a>
             <p className="text-gray-300 text-sm">
               DCX Group is an international investment company.

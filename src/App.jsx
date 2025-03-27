@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import ThemeProvider from "./components/ThemeProvider";
 import Home from "./pages/Home";
 import WhoWeAre from "./pages/WhoWeAre";
@@ -9,22 +10,30 @@ import ContactUs from "./pages/ContactUs";
 import ServiceDetail from "./pages/ServiceDetail";
 import "./globals.css";
 
+// Layout Component to include Navbar
+function Layout({ children }) {
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+      {children}
+    </div>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
-      
       <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/who-we-are" element={<WhoWeAre />} />
-            <Route path="/what-we-do" element={<WhatWeDo />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            {/* Dynamic Route for Service Detail Page */}
-            <Route path="/service/:id" element={<ServiceDetail />} />
-          </Routes>
-          
+        <Routes>
+          <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/who-we-are" element={<Layout><WhoWeAre /></Layout>} />
+          <Route path="/what-we-do" element={<Layout><WhatWeDo /></Layout>} />
+          <Route path="/news" element={<Layout><News /></Layout>} />
+          <Route path="/careers" element={<Layout><Careers /></Layout>} />
+          <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
+          {/* Dynamic Route for Service Detail Page */}
+          <Route path="/service/:id" element={<Layout><ServiceDetail /></Layout>} />
+        </Routes>
       </Router>
     </ThemeProvider>
   );

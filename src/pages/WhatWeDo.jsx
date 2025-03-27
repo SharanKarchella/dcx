@@ -110,7 +110,8 @@ export default function WhatWeDo() {
   };
 
   return (
-    <section className="py-16 md:py-20 px-6 bg-gray-100">
+    // <section className="py-16 md:py-20 px-6 bg-gray-100">
+    <section className="py-16 md:py-20 px-6 bg-blue-50">
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-900 tracking-tight">
           What We Do

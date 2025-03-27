@@ -1,5 +1,4 @@
 import { lazy, Suspense } from "react";
-import Navbar from "../components/Navbar.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 
 // Lazy load components
@@ -11,12 +10,12 @@ const Footer = lazy(() => import("../components/Footer.jsx"));
 // Fallback component with visible styling
 function LoadingFallback() {
   return (
-    <div 
-      style={{ 
-        padding: "20px", 
-        textAlign: "center", 
+    <div
+      style={{
+        padding: "20px",
+        textAlign: "center",
         height: "100px",
-        background: "#f0f0f0" 
+        background: "#f0f0f0"
       }}
     >
       Loading...
@@ -35,7 +34,6 @@ function ErrorFallback({error}) {
 function Home() {
   return (
     <main className="min-h-screen">
-      <Navbar />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<LoadingFallback />}>
           <HeroBanner />
@@ -44,13 +42,13 @@ function Home() {
       
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<LoadingFallback />}>
-          <StrategyVision />
+          <WhatWeDo />
         </Suspense>
       </ErrorBoundary>
-      
+
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<LoadingFallback />}>
-          <WhatWeDo />
+          <StrategyVision />
         </Suspense>
       </ErrorBoundary>
       
