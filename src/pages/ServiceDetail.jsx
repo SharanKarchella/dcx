@@ -259,7 +259,7 @@ export default function ServiceDetail() {
 
       {/* Contact Icon */}
       <span
-        className="fixed bottom-6 right-6 w-12 h-12 md:w-20 md:h-20 bg-blue-500 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer"
+        className="fixed bottom-6 right-6 w-12 h-12 md:w-20 md:h-20 bg-blue-500 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer z-50 custom-bounce"
         onClick={() => setIsModalOpen(true)}
       >
         📞

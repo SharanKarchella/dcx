@@ -1,25 +1,25 @@
 export default function ContactUs() {
   const contacts = [
     {
-      name: "Rahul Sharma",
-      title: "Customer Relations Manager",
-      phone: "+91 987-654-3210",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      name: "Dhanush Chandra",
+      title: "Chief Executive Officer",
+      phone: "+41 768 44 29 88",
+      image: "images/whoAreWe/dhanush.png",
     },
     {
-      name: "Dhanush Patel",
-      title: "Business Development Lead",
-      phone: "+91 876-543-2109",
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      name: "Munilal Jatavath",
+      title: "Chief Technology Officer",
+      phone: "+41 78 33 33 100",
+      image: "images/whoAreWe/muni.png",
     },
   ];
 
   const officeAddress = {
-    line1: "123 Innovation Drive",
+    line1: "Glasi Bülach, 8180 Bülach",
     line2: "Tech City, Mumbai, MH 400001",
-    country: "India",
-    email: "info@company.com",
-    phone: "+91 22-1234-5678",
+    country: "Switzerland",
+    email: "swiss.dcx@gmail.com",
+    phone: "+41 768 44 29 88",
   };
 
   return (
@@ -73,8 +73,8 @@ export default function ContactUs() {
           </h2>
           <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
             {officeAddress.line1}
-            <br />
-            {officeAddress.line2}
+            {/* <br /> */}
+            {/* {officeAddress.line2} */}
             <br />
             {officeAddress.country}
           </p>
