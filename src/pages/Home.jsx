@@ -53,7 +53,7 @@ function Home() {
       // console.log("Payload:", formData);
   
       const response = await axios.post(
-        "http://localhost:3006/send-email", 
+        "https://backend-dcx.vercel.app/send-email", 
         formData,
         {
           headers: {

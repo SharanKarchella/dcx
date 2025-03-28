@@ -173,7 +173,7 @@ export default function ServiceDetail() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3006/send-email",
+        "https://backend-dcx.vercel.app/send-email",
         formData
       );
 
