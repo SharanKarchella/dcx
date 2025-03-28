@@ -174,7 +174,10 @@ export default function ServiceDetail() {
     try {
       const response = await axios.post(
         "https://backend-dcx.vercel.app/send-email",
-        formData
+        formData,
+        {
+          headers: { "Content-Type": "application/json" }, // Explicitly setting headers
+        }
       );
 
       if (response.status === 200) {
