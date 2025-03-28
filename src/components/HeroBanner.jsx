@@ -6,8 +6,9 @@ export default function HeroBanner() {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const backgroundImages = [
+    '/images/whatwedo/transport/car1.jpeg',
     '/images/HeroSection/heroBg1.webp',
-    '/images/HeroSection/heroBg2.jpeg'
+    '/images/HeroSection/heroBg2.jpeg',
   ];
 
   // Automatic image transition
@@ -42,7 +43,7 @@ export default function HeroBanner() {
       {/* Content */}
       <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-10">
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 max-w-3xl">
-        Live the Swiss Dream, Where Luxury Meets Perfection.
+        <div>Live the Swiss Dream,</div> Where Luxury Meets Perfection.
         </h1>
         <Button
           onClick={() => navigate("/contact-us")}

@@ -49,13 +49,13 @@ export default function Navbar() {
             alt="Logo"
             className="h-[6.25rem] w-[6.25rem] items-center object-contain mr-4 rounded-lg"
           />
-          <span
+          {/* <span
             className={`text-3xl font-bold font-poppins ${
               isSpecialPage || scrolled ? "text-black" : "text-white"
             }`}
           >
             DCX
-          </span>
+          </span> */}
         </div>
 
         {/* Desktop Navigation */}
