@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function WhatWeDo() {
   const services = [
@@ -83,13 +83,64 @@ export default function WhatWeDo() {
       ]
     },
   ]; 
-
-  //"Education Consultancy in European Union","Media", "Real Estate","Accommodation",
   
   // State to track image index for each service
   const [imageIndices, setImageIndices] = useState(services.map(() => 0));
   // State to track active card (for both hover and tap)
   const [activeCard, setActiveCard] = useState(null);
+  // State to track loaded images
+  const [loadedImages, setLoadedImages] = useState({});
+  // Ref for intersection observer
+  const cardRefs = useRef(services.map(() => null));
+  
+  // Function to preload an image
+  const preloadImage = (url) => {
+    if (!loadedImages[url]) {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        setLoadedImages(prev => ({
+          ...prev,
+          [url]: true
+        }));
+      };
+    }
+  };
+
+  // Handle lazy loading with Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index);
+          // Preload first image of this service
+          preloadImage(services[index].images[0]);
+          // Stop observing this element
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' }); // Load when within 200px of viewport
+    
+    cardRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.index = index;
+        observer.observe(ref);
+      }
+    });
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Preload next image when current one changes
+  useEffect(() => {
+    imageIndices.forEach((currentIndex, serviceIndex) => {
+      const service = services[serviceIndex];
+      const nextIndex = (currentIndex + 1) % service.images.length;
+      preloadImage(service.images[nextIndex]);
+    });
+  }, [imageIndices]);
 
   // Rotate images every 3 seconds for each service
   useEffect(() => {
@@ -110,76 +161,86 @@ export default function WhatWeDo() {
   };
 
   return (
-    // <section className="py-16 md:py-20 px-6 bg-gray-100">
     <section className="py-16 md:py-20 px-6 bg-blue-100">
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-900 tracking-tight">
           What We Do
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <Link
-              to={`/service/${service.id}`}
-              key={service.id}
-              className="group relative bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center cursor-pointer overflow-hidden h-64 transform transition-all duration-500 ease-in-out"
-              style={{
-                backgroundImage: `url(${service.images[imageIndices[index]]})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                transform: activeCard === service.id ? 'scale(1.05)' : 'scale(1)',
-                boxShadow: activeCard === service.id 
-                  ? '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)' 
-                  : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-              }}
-              onMouseEnter={() => setActiveCard(service.id)}
-              onMouseLeave={() => setActiveCard(null)}
-              onTouchStart={() => handleCardInteraction(service.id)}
-            >
-              {/* Overlay gradient effect */}
-              <div 
-                className="absolute inset-0 transition-all duration-500 ease-in-out"
+          {services.map((service, index) => {
+            const currentImageUrl = service.images[imageIndices[index]];
+            const isImageLoaded = loadedImages[currentImageUrl];
+            
+            return (
+              <Link
+                to={`/service/${service.id}`}
+                key={service.id}
+                ref={el => cardRefs.current[index] = el}
+                className="group relative bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center cursor-pointer overflow-hidden h-64 transform transition-all duration-500 ease-in-out"
                 style={{
-                  background: activeCard === service.id 
-                    ? 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 100%)' 
-                    : 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%)'
+                  backgroundImage: isImageLoaded ? `url(${currentImageUrl})` : 'none',
+                  backgroundColor: !isImageLoaded ? '#f0f0f0' : 'transparent',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  transform: activeCard === service.id ? 'scale(1.05)' : 'scale(1)',
+                  boxShadow: activeCard === service.id 
+                    ? '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)' 
+                    : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
                 }}
-              ></div>
-              
-              {/* Title with slide-up animation */}
-              <div 
-                className="relative z-10 w-full px-6 transition-all duration-500 ease-in-out"
-                style={{
-                  transform: activeCard === service.id ? 'translateY(-10px)' : 'translateY(0)'
+                onMouseEnter={() => {
+                  setActiveCard(service.id);
+                  // Preload all images for this service on hover
+                  service.images.forEach(url => preloadImage(url));
                 }}
+                onMouseLeave={() => setActiveCard(null)}
+                onTouchStart={() => handleCardInteraction(service.id)}
               >
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-lg uppercase">
-                  {service.title}
-                </h3>
-                
-                {/* Additional content revealed on active state */}
+                {/* Overlay gradient effect */}
                 <div 
-                  className="overflow-hidden transition-all duration-500 ease-in-out"
+                  className="absolute inset-0 transition-all duration-500 ease-in-out"
                   style={{
-                    maxHeight: activeCard === service.id ? '100px' : '0',
-                    opacity: activeCard === service.id ? 1 : 0,
-                    marginTop: activeCard === service.id ? '12px' : '0'
+                    background: activeCard === service.id 
+                      ? 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 100%)' 
+                      : 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%)'
+                  }}
+                ></div>
+                
+                {/* Title with slide-up animation */}
+                <div 
+                  className="relative z-10 w-full px-6 transition-all duration-500 ease-in-out"
+                  style={{
+                    transform: activeCard === service.id ? 'translateY(-10px)' : 'translateY(0)'
                   }}
                 >
-                  <div className="h-1 w-16 bg-blue-400 mx-auto mb-3"></div>
-                  <p className="text-white text-sm">Explore our {service.title.toLowerCase()} services</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-lg uppercase">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Additional content revealed on active state */}
+                  <div 
+                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                    style={{
+                      maxHeight: activeCard === service.id ? '100px' : '0',
+                      opacity: activeCard === service.id ? 1 : 0,
+                      marginTop: activeCard === service.id ? '12px' : '0'
+                    }}
+                  >
+                    <div className="h-1 w-16 bg-blue-400 mx-auto mb-3"></div>
+                    <p className="text-white text-sm">Explore our {service.title.toLowerCase()} services</p>
+                  </div>
                 </div>
-              </div>
-              
-              {/* Animated border accent on active state */}
-              <div 
-                className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 transition-all duration-500 ease-in-out"
-                style={{
-                  transform: activeCard === service.id ? 'scaleX(1)' : 'scaleX(0)',
-                  transformOrigin: 'center'
-                }}
-              ></div>
-            </Link>
-          ))}
+                
+                {/* Animated border accent on active state */}
+                <div 
+                  className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 transition-all duration-500 ease-in-out"
+                  style={{
+                    transform: activeCard === service.id ? 'scaleX(1)' : 'scaleX(0)',
+                    transformOrigin: 'center'
+                  }}
+                ></div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

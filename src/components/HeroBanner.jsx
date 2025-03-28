@@ -5,11 +5,35 @@ import { Button } from "./ui/Button.jsx";
 export default function HeroBanner() {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState([]);
   const backgroundImages = [
     '/images/HeroSection/heroBg1.webp',
     '/images/HeroSection/heroBg2.jpeg',
-    '/images/whatwedo/transport/car1.jpeg',
+    '/images/HeroSection/heroBg3.jpg',
+    '/images/HeroSection/heroBg4.jpg',
+    '/images/HeroSection/heroBg5.png',
+    '/images/HeroSection/herBg6.jpg',
+    '/images/HeroSection/heroBg7.jpg',
   ];
+
+  // Lazy loading implementation
+  useEffect(() => {
+    // Preload current image and next image
+    const imagesToLoad = [
+      backgroundImages[currentImageIndex],
+      backgroundImages[(currentImageIndex + 1) % backgroundImages.length]
+    ];
+    
+    imagesToLoad.forEach(imageUrl => {
+      if (!loadedImages.includes(imageUrl)) {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+          setLoadedImages(prev => [...prev, imageUrl]);
+        };
+      }
+    });
+  }, [currentImageIndex, backgroundImages, loadedImages]);
 
   // Automatic image transition
   useEffect(() => {
@@ -17,7 +41,7 @@ export default function HeroBanner() {
       setCurrentImageIndex((prevIndex) => 
         (prevIndex + 1) % backgroundImages.length
       );
-    }, 6000); // Change image every 5 seconds
+    }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -34,7 +58,7 @@ export default function HeroBanner() {
             index === currentImageIndex ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            backgroundImage: `url('${image}')`,
+            backgroundImage: loadedImages.includes(image) ? `url('${image}')` : 'none',
             filter: "brightness(0.7)"
           }}
         />

@@ -49,18 +49,13 @@ function Home() {
     e.preventDefault(); // Prevent default form submission behavior
   
     try {
-      // console.log("Sending email from Home page:");
-      // console.log("Payload:", formData);
-  
-      const response = await axios.post(
-        "https://backend-dcx.vercel.app/send-email", 
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+          const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}/send-email`,
+            formData,
+            {
+              headers: { "Content-Type": "application/json" }, // Explicitly setting headers
+            }
+          );
   
       // console.log("Full response:", response);
   
