@@ -1,22 +1,20 @@
 export default function WhoWeAre() {
   const founders = [
     {
-      name: "Munilal Jatavath",
-      title: "Founder's & CEO",
+      name: "Dhanush Chandra",
+      title: "Founder's & CEO of DCX",
       details: [
-        "With over 15 years of experience in business leadership, Rahul drives our vision to deliver innovative solutions across multiple industries.",
-        "Passionate about technology and sustainable growth, he has successfully scaled companies globally, earning numerous industry awards."
+        "A passionate entrepreneur dedicated to making Swiss luxury accessible to all. With a master's degree from the University of Zurich, I have honed my skills in business management and strategic leadership. At DCX, we are transforming luxury travel and lifestyle experiences. In addition to my role at DCX, I have a keen interest in investing in tech companies, particularly those innovating in AI and digital solutions. I am also passionate about event organizing, creating unforgettable experiences that bring people together"
       ],
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+      image: "images/whoAreWe/dhanush.png"
     },
     {
-      name: "Dhanush Chandra",
-      title: "Founder's & CEO",
+      name: "Munilal Jatavath",
+      title: "Founder's & CTO of DCX",
       details: [
-        "Dhanush oversees operations with a keen eye for detail, ensuring seamless execution of our diverse service offerings.",
-        "An expert in logistics and customer satisfaction, he brings 12 years of operational expertise to optimize our processes."
+        "I handle all business operations and thrive across multiple domains. With experience as a tour guide and operational head, I bring a well-rounded perspective to every aspect of the company. My journey has shaped my ability to lead, innovate, and provide exceptional experiences in luxury travel and lifestyle."
       ],
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+      image: "images/whoAreWe/muni.png"
     }
   ];
 
