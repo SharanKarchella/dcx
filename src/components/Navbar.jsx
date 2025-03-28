@@ -47,7 +47,7 @@ export default function Navbar() {
           <img
             src="/images/Logo/dcxlogo.jpeg"
             alt="Logo"
-            className="h-10 w-10 items-center object-contain mr-4 rounded-lg"
+            className="h-[6.25rem] w-[6.25rem] items-center object-contain mr-4 rounded-lg"
           />
           <span
             className={`text-3xl font-bold font-poppins ${
