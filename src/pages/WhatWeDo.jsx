@@ -8,8 +8,7 @@ export default function WhatWeDo() {
       title: "Tourism",
       images: [
         "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1505765050516-f72dcacfa9e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1514989940723-e8e51635b782?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "/images/HeroSection/heroBg2.jpeg",
       ]
     },
     { 
@@ -18,16 +17,16 @@ export default function WhatWeDo() {
       images: [
         "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
         "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
       ]
     },
     { 
       id: 3, 
       title: "Transportation",
       images: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1542221080-a38376356b8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "/images/whatwedo/transport/TRANS$.webp",
+        "/images/whatwedo/transport/car1.jpeg",
+        "/images/HeroSection/heroBg1.jpeg",
       ]
     },
     { 
@@ -43,9 +42,9 @@ export default function WhatWeDo() {
       id: 5, 
       title: "Real Estate",
       images: [
-        "https://images.unsplash.com/photo-1560518883-ce09059b512d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1514989940723-e8e51635b782?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "images/ServiceDetail/RealEstate/House.jpeg",
+        "images/ServiceDetail/RealEstate/House2.jpeg",
+        "images/ServiceDetail/RealEstate/House3.jpeg",
       ]
     },
     { 
@@ -84,8 +83,10 @@ export default function WhatWeDo() {
         "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
       ]
     },
-  ];
+  ]; 
 
+  //"Education Consultancy in European Union","Media", "Real Estate","Accommodation",
+  
   // State to track image index for each service
   const [imageIndices, setImageIndices] = useState(services.map(() => 0));
   // State to track active card (for both hover and tap)
@@ -111,7 +112,7 @@ export default function WhatWeDo() {
 
   return (
     // <section className="py-16 md:py-20 px-6 bg-gray-100">
-    <section className="py-16 md:py-20 px-6 bg-blue-50">
+    <section className="py-16 md:py-20 px-6 bg-blue-100">
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-900 tracking-tight">
           What We Do

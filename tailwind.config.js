@@ -7,6 +7,9 @@ export default {
         background: "hsl(var(--background))", // Define custom background color
         foreground: "hsl(var(--foreground))", // Define custom foreground color
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

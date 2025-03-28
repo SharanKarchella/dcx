@@ -16,7 +16,7 @@ export default function HeroBanner() {
       setCurrentImageIndex((prevIndex) => 
         (prevIndex + 1) % backgroundImages.length
       );
-    }, 4000); // Change image every 5 seconds
+    }, 6000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -46,7 +46,7 @@ export default function HeroBanner() {
         </h1>
         <Button
           onClick={() => navigate("/contact-us")}
-          className="bg-[#0a2a3b] hover:bg-[#0000FF]/60 text-white px-8 py-6 text-lg !rounded-full"
+          className="bg-[#0a2a3b] hover:bg-blue-800 text-white px-8 py-6 text-sm !rounded-full"
         >
           Contact Now
         </Button>

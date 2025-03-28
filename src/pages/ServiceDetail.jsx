@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const services = [
   {
@@ -13,7 +14,7 @@ const services = [
     ],
     images: [
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", // Paris (Eiffel Tower)
-      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"  // Swiss Alps
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", // Swiss Alps
     ],
   },
   {
@@ -28,7 +29,7 @@ const services = [
     images: [
       "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
       "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+      "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
     ],
   },
   {
@@ -57,7 +58,7 @@ const services = [
     images: [
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
     ],
   },
   {
@@ -117,7 +118,7 @@ const services = [
     images: [
       "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+      "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
     ],
   },
   {
@@ -144,6 +145,17 @@ export default function ServiceDetail() {
   // State for rotating images
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // State for modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // State for form data
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    requirement: "",
+    subject: "",
+  });
+
   // Rotate images every 3 seconds
   useEffect(() => {
     if (!service) return;
@@ -156,6 +168,27 @@ export default function ServiceDetail() {
 
     return () => clearInterval(interval); // Cleanup
   }, [service]);
+
+  //handle Submit
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3006/send-email",
+        formData
+      );
+
+      if (response.status === 200) {
+        alert("Message sent successfully!");
+        setFormData({ name: "", email: "", requirement: "", subject:"" });
+        setIsModalOpen(false);
+      } else {
+        alert("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
+  };
 
   if (!service) {
     return (
@@ -204,7 +237,9 @@ export default function ServiceDetail() {
         {/* Service Details 2 */}
         <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md flex flex-col md:flex-row gap-6">
           <img
-            src={service.images[(currentImageIndex + 1) % service.images.length]}
+            src={
+              service.images[(currentImageIndex + 1) % service.images.length]
+            }
             alt={service.title}
             className="w-full md:w-1/2 rounded-lg shadow-md"
           />
@@ -218,6 +253,119 @@ export default function ServiceDetail() {
           </div>
         </div>
       </div>
+
+      {/* Contact Icon */}
+      <span
+        className="fixed bottom-6 right-6 w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer"
+        onClick={() => setIsModalOpen(true)}
+      >
+        📞
+      </span>
+
+      {/* {Modal} */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[999]">
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-xl font-bold mb-4">Contact Us</h2>
+            <p className="text-gray-700 mb-6">Feel free to reach out to us!</p>
+
+            {/* Input Fields */}
+            <div className="space-y-4">
+              {/* Name Field */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Your Nice Name:
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  placeholder="John Doe"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  placeholder="email@example.com"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              {/* Subject Field */}
+              <div>
+                <label htmlFor="subject">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subject: e.target.value })
+                  }
+                  placeholder="Enter the subject"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              {/* Requirement Field */}
+              <div>
+                <label
+                  htmlFor="requirement"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Your Requirement:
+                </label>
+                <textarea
+                  id="requirement"
+                  value={formData.requirement}
+                  onChange={(e) =>
+                    setFormData({ ...formData, requirement: e.target.value })
+                  }
+                  placeholder="Describe your requirement so that we would schedule a call with you"
+                  className="w-full border border-gray-300 rounded-lg p-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex justify-end space-x-4 mt-6">
+              <button
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Close
+              </button>
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={handleSubmit}
+              >
+                Send Message
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
