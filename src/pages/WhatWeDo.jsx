@@ -26,7 +26,7 @@ export default function WhatWeDo() {
       images: [
         "/images/whatwedo/transport/TRANS$.webp",
         "/images/whatwedo/transport/car1.jpeg",
-        "/images/HeroSection/heroBg1.jpeg",
+        "/images/whatwedo/transport/car2.jpeg",
       ]
     },
     { 
@@ -51,9 +51,8 @@ export default function WhatWeDo() {
       id: 6, 
       title: "IT Tech Services",
       images: [
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1531497861053-3ee3e01c7869?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "images/ServiceDetail/It/image.png",
+        "images/ServiceDetail/It/it.jpeg",
       ]
     },
     { 
@@ -62,7 +61,7 @@ export default function WhatWeDo() {
       images: [
         "https://images.unsplash.com/photo-1585435557343-3b092031a831?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
         "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-        "https://images.unsplash.com/photo-1607619056574-6dfaeec6c371?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+        "/images/ServiceDetail/Pharma/Pharma1.jpeg",
       ]
     },
     { 
