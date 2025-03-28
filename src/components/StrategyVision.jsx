@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 export default function StrategyVision() {
   const images = [
-    
     "/images/StrategyVision/image.png",
     "/images/StrategyVision/image2.png",
     "/images/StrategyVision/team.png",
@@ -22,19 +21,21 @@ export default function StrategyVision() {
     <section className="py-16 px-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
           {/* Strategy & Vision Text Section */}
           <div className="space-y-12">
             {/* Strategy */}
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Strategy</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">DCX</h2>
               <p className="text-gray-700 leading-relaxed">
-                DCX Group invests selectively to acquire, manage, and sell private equities and real estate
-                in domestic and international businesses. Its strategic emphasis is on identifying the
-                optimal investment opportunities and maximizing the value of its assets globally.
+                DCX is a Swiss company offering premium services in tourism,
+                hospitality, luxury car rentals, plane and flight rentals, media
+                services, transportation, and real estate. We specialize in
+                creating exceptional experiences with unparalleled luxury,
+                precision, and elegance, tailored for discerning clients seeking
+                the finest in every journey.
               </p>
             </div>
-  
+
             {/* Vision */}
             <div className="border-t pt-6">
               <div className="flex items-start gap-6">
@@ -57,16 +58,19 @@ export default function StrategyVision() {
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Vision</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">
+                    Vision
+                  </h2>
                   <p className="text-gray-700 leading-relaxed">
-                    To become one of the most diverse business groups and investment companies, DCX aims
-                    to develop a strong, cohesive vision to lead its current and future investment strategy.
+                    Experience the luxury life, accessible to everyone, where
+                    elegance meets convenience – from chartered planes and
+                    luxury cars to 5-star hotels, all in one frame.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-  
+
           {/* Image Carousel Section */}
           <div className="bg-[#0a2a3b] rounded-lg p-6 flex items-center justify-center overflow-hidden w-full max-w-[800px] h-[450px]">
             <div className="relative w-full h-full">
@@ -77,7 +81,6 @@ export default function StrategyVision() {
               />
             </div>
           </div>
-  
         </div>
       </div>
     </section>

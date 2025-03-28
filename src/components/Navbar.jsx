@@ -30,7 +30,7 @@ export default function Navbar() {
 
   // Determine if the current page is "What We Do" or "Contact Us"
   const isSpecialPage =
-    location.pathname === "/what-we-do" || location.pathname === "/contact-us" || location.pathname.startsWith("/service/");
+    location.pathname === "/what-we-do" || location.pathname === "/contact-us";
 
   return (
     <header
@@ -49,13 +49,13 @@ export default function Navbar() {
             alt="Logo"
             className="h-[6.25rem] w-[6.25rem] items-center object-contain mr-4 rounded-lg"
           />
-          {/* <span
-            className={`text-3xl font-bold font-poppins ${
+          <span
+            className={`text-3xl font-bold ${
               isSpecialPage || scrolled ? "text-black" : "text-white"
             }`}
           >
             DCX
-          </span> */}
+          </span>
         </div>
 
         {/* Desktop Navigation */}
