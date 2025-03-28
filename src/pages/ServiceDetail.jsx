@@ -173,7 +173,7 @@ export default function ServiceDetail() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://backend-dcx.vercel.app/send-email",
+        `${import.meta.env.VITE_BACKEND_URL}/send-email`,
         formData,
         {
           headers: { "Content-Type": "application/json" }, // Explicitly setting headers
