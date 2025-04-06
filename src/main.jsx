@@ -6,7 +6,8 @@ import "./globals.css"; // Global styles
 import ThemeProvider from "./components/ThemeProvider"; // Theme Provider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ThemeProvider>
-    <App />
-  </ThemeProvider>
+  // <ThemeProvider>
+  //   <App />
+  // </ThemeProvider>
+  <div>Under maintenance</div>
 );
