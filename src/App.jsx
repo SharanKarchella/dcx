@@ -22,20 +22,25 @@ function Layout({ children }) {
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout><Home /></Layout>} />
-          <Route path="/who-we-are" element={<Layout><WhoWeAre /></Layout>} />
-          <Route path="/what-we-do" element={<Layout><WhatWeDo /></Layout>} />
-          <Route path="/news" element={<Layout><News /></Layout>} />
-          <Route path="/careers" element={<Layout><Careers /></Layout>} />
-          <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
-          {/* Dynamic Route for Service Detail Page */}
-          <Route path="/service/:id" element={<Layout><ServiceDetail /></Layout>} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <div className="relative h-screen overflow-hidden bg-black flex justify-center items-center">
+    <div className="absolute top-[-100px] animate-scrollDown text-white text-xl font-bold text-center">
+      First pay me money to see your website 💸
+    </div>
+  </div>
+    // <ThemeProvider>
+    //   <Router>
+    //     <Routes>
+    //       <Route path="/" element={<Layout><Home /></Layout>} />
+    //       <Route path="/who-we-are" element={<Layout><WhoWeAre /></Layout>} />
+    //       <Route path="/what-we-do" element={<Layout><WhatWeDo /></Layout>} />
+    //       <Route path="/news" element={<Layout><News /></Layout>} />
+    //       <Route path="/careers" element={<Layout><Careers /></Layout>} />
+    //       <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
+    //       {/* Dynamic Route for Service Detail Page */}
+    //       <Route path="/service/:id" element={<Layout><ServiceDetail /></Layout>} />
+    //     </Routes>
+    //   </Router>
+    // </ThemeProvider>
   );
 }
 

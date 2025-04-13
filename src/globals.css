@@ -103,3 +103,14 @@ body {
 .custom-bounce {
   animation: custom-bounce 1s infinite;
 }
+
+@keyframes scrollDown {
+  to {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scrollDown {
+  animation: scrollDown 2s ease-out forwards;
+}
